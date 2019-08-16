@@ -1,1 +1,1 @@
-# ORMediaAugustSeptember
+Обучающий проект для группы "JAVA"
