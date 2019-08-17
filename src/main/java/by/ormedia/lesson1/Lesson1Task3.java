@@ -7,11 +7,11 @@ public class Lesson1Task3 {
 	public static void main(String[] args) {
 		int array1[] = randomArray(6, 0, 30);
 		int array2[] = randomArray(11, 0, 30);
-		System.out.println("1-й массив:");
+		System.out.println("array 1:");
 		show(array1);
-		System.out.println("2-й массив:");
+		System.out.println("array 2:");
 		show(array2);
-		System.out.println("новый массив:");
+		System.out.println("new array:");
 		show(cutAndMerge(array1, array2, false));
 
 	}
