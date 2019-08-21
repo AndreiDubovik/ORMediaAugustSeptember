@@ -4,65 +4,126 @@ import java.util.Arrays;
 
 public class Lesson2{
 	
-	static String line = "hgfjhfjhg";
-
 	public static void main(String[] args) {
-		int i = 7;
-		int z = i==2?5:0;
-		System.out.println(z);
+		int[][]field = new int[10][10];
+		int[][]array = array(5,5,1);
+		insert(field,array,1,1);
+		show(field);
 	}
 	
-	protected static void sort(int array[]){
-		for(int x=0;x<array.length;x++){
-		for(int i = 0;i<array.length-1;i++){
-			if(array[i]<array[i+1]){
-				int temp = array[i+1];
-				array[i+1] = array[i];
-				array[i] = temp;
-			}
-		}}
-	}
-	
-	
-	
-	public static void anotherTest(int[]array){
-		array = new int[array.length];
-		show(array);
-	}
-	
-	public static int maxSequence(int[]array, int number){
-		int count = 0;
-		int temp = 0;
-		for(int i=0;i<array.length;i++){
-			if(array[i]==number){
-				temp++;
-				if(i==array.length-1&&temp>count)count=temp;
-			}else{
-				if(temp>count)count=temp;
-				temp = 0;
-			}
-		}
-		return count;
-	}
-	
-	private static int random(int min, int max){
-		return (int)(Math.random()*(max-min+1))+min;
-	}
-	
-	public static int[] randomArray(int length, int min, int max){
-		int[]result = new int[length];
-		for(int i = 0;i<length;i++)result[i]=random(min,max);
+	public static int[][] array(int rows, int columns, int number){
+		int[][]result = new int[rows][columns];
+		for(int r = 0;r<rows;r++)for(int c = 0;c<columns;c++)result[r][c] = number;
 		return result;
 	}
 	
-	public static void show(int[]array){
-		for(int i=0;i<array.length;i++)
-			System.out.print(array[i]+" ");
+	public static void insert(int[][]field, int[][]array, int row, int column){
+		for(int r=0;r<array.length;r++){
+			for(int c=0;c<array[r].length;c++){
+				field[row+r][column+c] = array[r][c];
+			}
+		}
+	}
+	
+	public static boolean canInsert(int[][]field, int[][]array, int row, int column){
+		for(int r=0;r<array.length;r++){
+			if(row+r>=field.length)return false;
+			for(int c=0;c<array[r].length;c++){
+				if(column+c>=field[r+row].length)return false;
+				if(field[row+r][column+c]!=0)return false;
+			}
+		}
+		return true;
+	}
+	
+	public static int[] cutAndMerge(int[]array1, int[]array2, boolean max){
+		int length = array1.length>array2.length?array2.length:array1.length;
+		int result[] = new int[length];
+		for(int i=0;i<length;i++){
+			if(max){
+				if(array1[i]>array2[i]){
+					result[i] = array1[i];
+				}else result[i] = array2[i];
+			}else{
+				if(array1[i]<array2[i]){
+					result[i] = array1[i];
+				}else result[i] = array2[i];
+			}
+		}
+		return result;
+	}
+	
+	public static void sort(int[] array, boolean fromMinToMax){
+		Arrays.sort(array);
+		if(!fromMinToMax){
+			int[]temp = new int[array.length];
+			for(int i=0;i<array.length;i++)temp[i]=array[array.length-1-i];
+			for(int i=0;i<array.length;i++)array[i]=temp[i];
+		}
+		
+	}
+	
+	public static void replace(int[]array, int toReplace, int replaceTo){
+		for(int i=0;i<array.length;i++)if(array[i]==toReplace)array[i]=replaceTo;
+	}
+	
+	public static int indexOfMaxDifference(int[]array){
+		int diff = 0;
+		int index = 0;
+		for(int i = 0;i<array.length-1;i++){
+			int temp = Math.abs(array[i+1]-array[i]);
+			if(temp>diff){
+				diff = temp;
+				index=i;
+			}
+		}
+		return index;
+	}
+	
+	public static int maxSequence(int array[], int number){
+		int seq = 0;
+		int tempSeq = 0;
+		for(int i=0;i<array.length;i++){
+			if(array[i]==number){
+				tempSeq++;
+				if(tempSeq>seq)seq=tempSeq;
+			}else tempSeq = 0;
+		}
+		return seq;
+	}
+	
+	public static int oddEvenSum(int[]array, boolean odds){
+		int sum = 0;
+		if(odds){
+			for(int i:array)if(i%2==0)sum+=i;
+		}else{
+			for(int i:array)if(i%2!=0)sum+=i;
+		}
+		return sum;
+	}
+	
+	public static void show(int[] array){
+		for(int i:array)System.out.print(i+" ");
 		System.out.println();
 	}
 	
-	public static void show(int[][] array){
-		for(int[]a:array)show(a);
+	public static void show(int[][]array){
+		for(int row=0;row<array.length;row++)show(array[row]);
 	}
-
+	
+	public static int[][] randomArray(int rows, int columns, int min, int max){
+		int[][]array = new int[rows][];
+		for(int i=0;i<rows;i++)array[i]=randomArray(columns,min,max);
+		return array;
+	}
+	
+	public static int[] randomArray(int length, int min, int max){
+		int array[]=new int[length];
+		for(int i=0;i<array.length;i++)array[i]=random(min,max);
+		return array;
+	}
+	
+	public static int random(int min, int max){
+		return (int)((max-min+1)*Math.random())+min;
+	}
 }
