@@ -1,7 +1,5 @@
 package by.ormedia.lesson3;
 
-import by.myown.lessons.lesson2.Student;
-
 public class Student {
 private static int COUNT;
 	
