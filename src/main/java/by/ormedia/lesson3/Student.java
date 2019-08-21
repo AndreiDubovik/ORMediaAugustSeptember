@@ -1,6 +1,6 @@
 package by.ormedia.lesson3;
 
-public class Student {
+public class Student implements IStudent{
 private static int COUNT;
 	
 	static{

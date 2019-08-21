@@ -2,8 +2,6 @@ package by.ormedia.lesson3;
 
 import static by.ormedia.lesson2.Lesson2.*;
 
-import by.myown.lessons.lesson2.IStudent;
-import by.myown.lessons.lesson2.Student;
 
 public class Lesson3 {
 
