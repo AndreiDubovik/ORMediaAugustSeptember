@@ -34,7 +34,7 @@ public class HomeTask {
 	public static void main(String...args){
 		show(FIELD);
 		System.out.println();
-		int row = 3;
+		int row = 7;
 		int column = 3;
 		int steps = 0;
 		List<Cell>cells = Arrays.asList(new Cell(row,column));
